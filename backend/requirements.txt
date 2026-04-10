@@ -1,6 +1,33 @@
-Flask==3.0.0
-flask-sock==0.6.0
-SQLAlchemy==2.0.23
-alembic==1.13.0
-pydantic==2.5.2
-openai-whisper==20231117
+# --- Core Web Framework ---
+Flask>=3.0.0
+flask-sock>=0.6.0
+flask-cors>=4.0.0
+
+# --- Database ---
+SQLAlchemy>=2.0.23
+alembic>=1.13.0
+
+# --- Validation ---
+pydantic>=2.10.0
+
+# --- ASR: OpenAI Whisper (English + Hindi) ---
+openai-whisper>=20231117
+
+# --- ASR: IndicWhisper / HuggingFace (Kannada + Indic) ---
+transformers>=4.36.0
+accelerate>=0.25.0
+soundfile>=0.12.1
+
+# --- ML Runtime ---
+torch>=2.1.0
+numpy>=1.24.0
+
+# --- LLM: Groq (Conversation Engine) ---
+groq>=0.4.0
+
+# --- LLM: OpenAI SDK (Extraction fallback) ---
+openai>=1.6.0
+
+# --- TTS: Sarvam AI + gTTS fallback ---
+requests>=2.31.0
+gTTS>=2.4.0

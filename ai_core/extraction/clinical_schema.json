@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VaaksetuClinicalRecord",
+  "description": "Structured clinical data extracted from a doctor-patient conversation by the Vaaksetu AI pipeline.",
+  "type": "object",
+  "properties": {
+    "patient_info": {
+      "type": "object",
+      "description": "Basic patient demographics mentioned in conversation.",
+      "properties": {
+        "name": { "type": ["string", "null"] },
+        "age": { "type": ["integer", "null"] },
+        "gender": { "type": ["string", "null"], "enum": ["male", "female", "other", null] },
+        "weight_kg": { "type": ["number", "null"] },
+        "height_cm": { "type": ["number", "null"] }
+      }
+    },
+    "chief_complaint": {
+      "type": ["string", "null"],
+      "description": "The primary reason the patient is seeking care, in their own words."
+    },
+    "symptoms": {
+      "type": "array",
+      "description": "All symptoms mentioned by the patient.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Symptom name (e.g. 'chest pain', 'headache')." },
+          "body_region": { "type": ["string", "null"], "description": "Affected body area." },
+          "severity": { "type": ["string", "null"], "enum": ["mild", "moderate", "severe", null] },
+          "duration": { "type": ["string", "null"], "description": "How long the symptom has lasted (e.g. '3 days', '2 weeks')." },
+          "frequency": { "type": ["string", "null"], "description": "How often it occurs (e.g. 'constant', 'intermittent', 'daily')." },
+          "onset": { "type": ["string", "null"], "description": "When it started or what triggered it." },
+          "character": { "type": ["string", "null"], "description": "Nature of the symptom (e.g. 'sharp', 'dull', 'burning')." },
+          "radiation": { "type": ["string", "null"], "description": "Where the symptom radiates to." },
+          "aggravating_factors": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "What makes it worse."
+          },
+          "relieving_factors": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "What makes it better."
+          },
+          "associated_symptoms": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Other symptoms occurring alongside."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    "vitals": {
+      "type": "object",
+      "description": "Vital signs mentioned or measured.",
+      "properties": {
+        "blood_pressure_systolic": { "type": ["integer", "null"] },
+        "blood_pressure_diastolic": { "type": ["integer", "null"] },
+        "heart_rate_bpm": { "type": ["integer", "null"] },
+        "temperature_f": { "type": ["number", "null"] },
+        "respiratory_rate": { "type": ["integer", "null"] },
+        "spo2_percent": { "type": ["number", "null"] },
+        "blood_sugar_mg_dl": { "type": ["number", "null"] }
+      }
+    },
+    "medical_history": {
+      "type": "object",
+      "description": "Past medical / surgical / family history.",
+      "properties": {
+        "past_conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known past diagnoses (e.g. 'diabetes', 'hypertension')."
+        },
+        "surgeries": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Past surgeries."
+        },
+        "family_history": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Relevant family medical history."
+        },
+        "allergies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known allergies (drugs, food, environmental)."
+        }
+      }
+    },
+    "current_medications": {
+      "type": "array",
+      "description": "Medications the patient is currently taking.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "dosage": { "type": ["string", "null"] },
+          "frequency": { "type": ["string", "null"] },
+          "route": { "type": ["string", "null"], "description": "oral, IV, topical, etc." }
+        },
+        "required": ["name"]
+      }
+    },
+    "lifestyle": {
+      "type": "object",
+      "description": "Lifestyle factors mentioned.",
+      "properties": {
+        "smoking": { "type": ["string", "null"], "description": "Smoking status and details." },
+        "alcohol": { "type": ["string", "null"], "description": "Alcohol consumption details." },
+        "diet": { "type": ["string", "null"] },
+        "exercise": { "type": ["string", "null"] },
+        "sleep": { "type": ["string", "null"] },
+        "occupation": { "type": ["string", "null"] }
+      }
+    },
+    "provisional_diagnosis": {
+      "type": "array",
+      "description": "Possible diagnoses suggested by the doctor.",
+      "items": { "type": "string" }
+    },
+    "recommended_tests": {
+      "type": "array",
+      "description": "Lab tests or imaging ordered / recommended.",
+      "items": { "type": "string" }
+    },
+    "prescribed_medications": {
+      "type": "array",
+      "description": "New medications prescribed during the visit.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "dosage": { "type": ["string", "null"] },
+          "frequency": { "type": ["string", "null"] },
+          "duration": { "type": ["string", "null"] },
+          "instructions": { "type": ["string", "null"] }
+        },
+        "required": ["name"]
+      }
+    },
+    "follow_up": {
+      "type": "object",
+      "description": "Follow-up instructions.",
+      "properties": {
+        "when": { "type": ["string", "null"], "description": "When to follow up (e.g. '1 week', '3 days')." },
+        "instructions": { "type": ["string", "null"] },
+        "red_flags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Warning signs that need immediate attention."
+        }
+      }
+    },
+    "conversation_summary": {
+      "type": ["string", "null"],
+      "description": "Brief natural-language summary of the entire encounter."
+    },
+    "language_detected": {
+      "type": ["string", "null"],
+      "description": "Primary language of the conversation (ISO 639-1)."
+    },
+    "confidence_score": {
+      "type": ["number", "null"],
+      "description": "Overall extraction confidence (0.0 – 1.0)."
+    }
+  }
+}
