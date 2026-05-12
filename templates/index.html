@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}VaakSetu — Voice-First Clinical Intake{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+<!-- ── Hero Section ────────────────────────────────── -->
+<section class="hero" id="hero-section">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge" id="hero-badge">
+                <span class="badge-dot"></span>
+                AI-Powered Healthcare
+            </div>
+            <h1 class="hero-title" id="hero-title">
+                Voice-First<br>
+                <span class="gradient-text">Clinical Intake</span>
+            </h1>
+            <p class="hero-subtitle" id="hero-subtitle">
+                Zero paperwork. Speak naturally in Kannada, Hindi, or English.
+                VaakSetu listens, extracts symptoms, and generates structured clinical records in real-time.
+            </p>
+            <div class="hero-actions">
+                <a href="/intake" class="btn btn-primary btn-glow" id="hero-start-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                    </svg>
+                    Start Intake
+                </a>
+                <a href="/history" class="btn btn-outline" id="hero-history-btn">View History</a>
+            </div>
+        </div>
+        <div class="hero-visual" id="hero-visual">
+            <div class="hero-card glass-card">
+                <div class="waveform-display">
+                    <div class="wave-bar" style="--i:0"></div>
+                    <div class="wave-bar" style="--i:1"></div>
+                    <div class="wave-bar" style="--i:2"></div>
+                    <div class="wave-bar" style="--i:3"></div>
+                    <div class="wave-bar" style="--i:4"></div>
+                    <div class="wave-bar" style="--i:5"></div>
+                    <div class="wave-bar" style="--i:6"></div>
+                    <div class="wave-bar" style="--i:7"></div>
+                    <div class="wave-bar" style="--i:8"></div>
+                    <div class="wave-bar" style="--i:9"></div>
+                    <div class="wave-bar" style="--i:10"></div>
+                    <div class="wave-bar" style="--i:11"></div>
+                </div>
+                <div class="hero-card-label">Live Audio Processing</div>
+                <div class="hero-card-tags">
+                    <span class="lang-tag tag-en">English</span>
+                    <span class="lang-tag tag-hi">हिंदी</span>
+                    <span class="lang-tag tag-kn">ಕನ್ನಡ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Stats Section ──────────────────────────────── -->
+<section class="stats-section" id="stats-section">
+    <div class="stats-container">
+        <div class="stat-card glass-card" id="stat-languages">
+            <div class="stat-number" data-target="3">0</div>
+            <div class="stat-label">Languages Supported</div>
+        </div>
+        <div class="stat-card glass-card" id="stat-time">
+            <div class="stat-number" data-target="80">0</div>
+            <div class="stat-label">% Time Saved</div>
+        </div>
+        <div class="stat-card glass-card" id="stat-accuracy">
+            <div class="stat-number" data-target="95">0</div>
+            <div class="stat-label">% Extraction Accuracy</div>
+        </div>
+        <div class="stat-card glass-card" id="stat-realtime">
+            <div class="stat-number special">RT</div>
+            <div class="stat-label">Real-time Processing</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Features Section ───────────────────────────── -->
+<section class="features-section" id="features-section">
+    <div class="features-container">
+        <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+        <p class="section-subtitle">Three simple steps to transform clinical workflows</p>
+
+        <div class="features-grid">
+            <div class="feature-card glass-card" id="feature-voice">
+                <div class="feature-icon icon-primary">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                    </svg>
+                </div>
+                <div class="feature-step">Step 1</div>
+                <h3 class="feature-title">Speak Naturally</h3>
+                <p class="feature-desc">Talk to the patient in any language. VaakSetu captures every word through advanced speech recognition.</p>
+            </div>
+
+            <div class="feature-card glass-card" id="feature-ai">
+                <div class="feature-icon icon-secondary">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
+                <div class="feature-step">Step 2</div>
+                <h3 class="feature-title">AI Processes</h3>
+                <p class="feature-desc">GPT-4o extracts symptoms, asks intelligent follow-ups, and identifies critical health signals automatically.</p>
+            </div>
+
+            <div class="feature-card glass-card" id="feature-report">
+                <div class="feature-icon icon-accent">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                </div>
+                <div class="feature-step">Step 3</div>
+                <h3 class="feature-title">Auto Record</h3>
+                <p class="feature-desc">Get a structured clinical record with symptoms, vitals, and diagnosis notes — ready for review and printing.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Counter animation ───────────────────────────
+const observerOptions = { threshold: 0.5 };
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const nums = entry.target.querySelectorAll('.stat-number[data-target]');
+            nums.forEach(num => {
+                const target = parseInt(num.dataset.target);
+                let current = 0;
+                const step = Math.ceil(target / 40);
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    num.textContent = current;
+                }, 30);
+            });
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+const statsSection = document.getElementById('stats-section');
+if (statsSection) counterObserver.observe(statsSection);
+
+// ── Scroll reveal ───────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-card, .stat-card').forEach(el => {
+    el.classList.add('reveal-on-scroll');
+    revealObserver.observe(el);
+});
+</script>
+{% endblock %}

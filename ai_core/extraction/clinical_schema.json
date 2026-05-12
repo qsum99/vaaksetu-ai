@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Clinical Record",
+  "type": "object",
+  "required": ["patient_name", "chief_complaint", "symptoms"],
+  "properties": {
+    "patient_name": { "type": "string" },
+    "age": { "type": "integer", "minimum": 0, "maximum": 120 },
+    "gender": { "type": "string", "enum": ["male", "female", "other"] },
+    "village": { "type": "string" },
+    "chief_complaint": { "type": "string" },
+    "symptoms": { "type": "array", "items": { "type": "string" } },
+    "duration": { "type": "string" },
+    "vitals": { "type": "object" },
+    "medical_history": { "type": "string" },
+    "diagnosis_notes": { "type": "string" },
+    "followup_date": { "type": "string", "format": "date" },
+    "language_mix": { "type": "array", "items": { "type": "string" } }
+  }
+}

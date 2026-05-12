@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaakSetu - Clinical Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/components.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">VaakSetu</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="intake.html">Intake</a></li>
+                    <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold m-0 text-primary">Generated Clinical Report</h2>
+            <div class="btn-group">
+                <button class="btn btn-outline-primary shadow-sm" id="play-tts-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-volume-up-fill me-1" viewBox="0 0 16 16">
+                      <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                      <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                      <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+                    </svg> Play Audio Summary
+                </button>
+                <button class="btn btn-outline-secondary shadow-sm" onclick="window.print()">Print</button>
+            </div>
+        </div>
+
+        <div class="glass-card p-5 mb-4 shadow">
+            <h4 class="mb-4 text-secondary">Patient Demographics</h4>
+            <div class="row g-3 mb-4 border-bottom pb-4">
+                <div class="col-md-3">
+                    <label class="form-label text-muted small fw-bold">Name</label>
+                    <input type="text" class="form-control" id="rep-name">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label text-muted small fw-bold">Age</label>
+                    <input type="number" class="form-control" id="rep-age">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-muted small fw-bold">Gender</label>
+                    <input type="text" class="form-control" id="rep-gender">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted small fw-bold">Village</label>
+                    <input type="text" class="form-control" id="rep-village">
+                </div>
+            </div>
+
+            <h4 class="mb-4 text-secondary">Clinical Details</h4>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label text-muted small fw-bold">Chief Complaint</label>
+                    <textarea class="form-control" id="rep-complaint" rows="2"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label text-muted small fw-bold">Symptoms</label>
+                    <textarea class="form-control" id="rep-symptoms" rows="2"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted small fw-bold">Duration</label>
+                    <input type="text" class="form-control" id="rep-duration">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted small fw-bold">Vitals (BP/Temp)</label>
+                    <input type="text" class="form-control" id="rep-vitals">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted small fw-bold">Follow-up Date</label>
+                    <input type="date" class="form-control" id="rep-followup">
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label text-muted small fw-bold">Medical History</label>
+                    <textarea class="form-control" id="rep-history" rows="2"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label text-muted small fw-bold">Diagnosis Notes</label>
+                    <textarea class="form-control" id="rep-notes" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="text-end mt-4">
+                <button class="btn btn-success btn-lg shadow-sm" id="save-history-btn">Save to History</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Placeholder to play audio bytes -->
+    <audio id="audio-player" style="display: none;"></audio>
+
+    <script src="js/apiClient.js"></script>
+    <script src="js/ttsPlayer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

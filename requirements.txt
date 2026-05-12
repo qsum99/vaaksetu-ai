@@ -1,0 +1,23 @@
+# ── Flask core ──────────────────────────────────
+flask==3.1.1
+flask-cors==5.0.1
+flask-socketio==5.5.1
+
+# ── Database ────────────────────────────────────
+sqlalchemy==2.0.41
+
+# ── AI / ASR ────────────────────────────────────
+openai-whisper
+transformers
+torch
+
+# ── Utilities ───────────────────────────────────
+langdetect==1.0.9
+requests==2.31.0
+python-dotenv==1.0.1
+jsonschema==4.22.0
+soundfile==0.12.1
+numpy
+
+# ── SocketIO transport ──────────────────────────
+eventlet==0.37.0

@@ -1,0 +1,5 @@
+chest pain: duration, radiation, breathing difficulty
+fever: duration, chills, cough
+vomiting: frequency, blood in vomit, last meal
+headache: location, intensity, vision changes
+stomach ache: exact location, loose motion, vomiting

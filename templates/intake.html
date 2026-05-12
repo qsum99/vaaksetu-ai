@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}VaakSetu — Live Voice Intake{% endblock %}
+{% block nav_intake %}active{% endblock %}
+
+{% block content %}
+<section class="intake-section">
+    <div class="intake-container">
+        <!-- Header -->
+        <div class="intake-header">
+            <h1 class="page-title">Live Voice <span class="gradient-text">Intake</span></h1>
+            <div class="connection-status" id="ws-status">
+                <span class="status-dot"></span>
+                <span class="status-text">Connecting…</span>
+            </div>
+        </div>
+
+        <div class="intake-grid">
+            <!-- ── Left Column: Audio + Transcript ──────── -->
+            <div class="intake-left">
+                <!-- Recorder Card -->
+                <div class="glass-card recorder-card" id="recorder-card">
+                    <div class="recorder-ring" id="recorder-ring">
+                        <button class="record-btn" id="record-btn" aria-label="Toggle recording">
+                            <svg class="mic-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                            <svg class="stop-icon" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                                <rect x="6" y="6" width="12" height="12" rx="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="recorder-status" id="record-status-text">Tap to Start Recording</p>
+
+                    <!-- Mini waveform during recording -->
+                    <div class="mini-waveform" id="mini-waveform">
+                        <div class="mw-bar"></div><div class="mw-bar"></div><div class="mw-bar"></div>
+                        <div class="mw-bar"></div><div class="mw-bar"></div><div class="mw-bar"></div>
+                        <div class="mw-bar"></div><div class="mw-bar"></div><div class="mw-bar"></div>
+                    </div>
+                </div>
+
+                <!-- Transcript Card -->
+                <div class="glass-card transcript-card" id="transcript-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            Live Transcript
+                        </h3>
+                        <span class="transcript-count" id="transcript-count">0 entries</span>
+                    </div>
+                    <div class="transcript-box" id="transcript-box">
+                        <div class="transcript-empty">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            </svg>
+                            <p>Start recording to see live transcription</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow-up Card -->
+                <div class="glass-card followup-card" id="followup-card">
+                    <div class="followup-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="followup-content">
+                        <h4 class="followup-label">AI Follow-up</h4>
+                        <p class="followup-text" id="followup-text">Listening for context…</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Right Column: Extracted Entities ─────── -->
+            <div class="intake-right">
+                <div class="glass-card entity-card" id="entity-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Patient Details
+                        </h3>
+                    </div>
+
+                    <form id="extraction-form" class="entity-form">
+                        <div class="form-group">
+                            <label class="form-label" for="form-name">Full Name</label>
+                            <input type="text" class="form-input" id="form-name" placeholder="Auto-detected…">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="form-age">Age</label>
+                                <input type="number" class="form-input" id="form-age" placeholder="—">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="form-gender">Gender</label>
+                                <select class="form-input" id="form-gender">
+                                    <option value="">—</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="form-village">Village / Location</label>
+                            <input type="text" class="form-input" id="form-village" placeholder="Auto-detected…">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="form-duration">Duration</label>
+                            <input type="text" class="form-input" id="form-duration" placeholder="e.g. 3 days">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Detected Symptoms</label>
+                            <div class="symptoms-container" id="symptoms-container">
+                                <span class="symptom-empty">No symptoms detected yet</span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <button class="btn btn-primary btn-block btn-glow" id="generate-report-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        Generate Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/audioRecorder.js"></script>
+<script src="/static/js/wsClient.js"></script>
+<script src="/static/js/apiClient.js"></script>
+<script src="/static/js/ttsPlayer.js"></script>
+<script src="/static/js/app.js"></script>
+{% endblock %}

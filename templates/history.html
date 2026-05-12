@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}VaakSetu — Patient History{% endblock %}
+{% block nav_history %}active{% endblock %}
+
+{% block content %}
+<section class="history-section">
+    <div class="history-container">
+        <!-- Header -->
+        <div class="history-header">
+            <h1 class="page-title">Patient <span class="gradient-text">History</span></h1>
+            <div class="search-bar glass-card" id="search-bar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" class="search-input" id="search-input" placeholder="Search by name or village…">
+                <button class="search-btn" id="search-btn">Search</button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="glass-card table-card" id="history-table-card">
+            <table class="data-table" id="history-table">
+                <thead>
+                    <tr>
+                        <th class="th-name">Patient Name</th>
+                        <th class="th-age">Age</th>
+                        <th class="th-village">Village</th>
+                        <th class="th-date">Date</th>
+                        <th class="th-action">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="history-tbody">
+                    <tr>
+                        <td colspan="5" class="table-loading">
+                            <div class="loading-spinner"></div>
+                            <span>Loading records…</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state" style="display:none">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <h3>No Records Found</h3>
+                <p>Start an intake session to create patient records.</p>
+                <a href="/intake" class="btn btn-primary">Start Intake</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/apiClient.js"></script>
+<script src="/static/js/app.js"></script>
+{% endblock %}
